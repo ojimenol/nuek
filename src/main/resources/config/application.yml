@@ -1,0 +1,7 @@
+app:
+  cos:
+    scos-jwe-url: https://srvnuarintra.santander.pru.bsch/cos/jwe/scos/generate
+  sas:
+    sas-auth-url: https://srvnuarintra.santander.pru.bsch/sas/authenticate/credentials
+  commerce:
+    commerce-url: https://repgtnprep.minsaitpaymentsprocessing.com/api/Comercios/commerces
