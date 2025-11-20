@@ -1,6 +1,6 @@
-package com.santander.san.merchant.integration.commerce.service;
+package com.santander.san.merchant.integration.commerces.service;
 
-import com.santander.san.merchant.integration.commerce.model.CommerceResponse;
+import com.santander.san.merchant.integration.commerces.model.CommerceResponse;
 
 public interface CommerceService {
   CommerceResponse getCommerces(String personCode, String personType,

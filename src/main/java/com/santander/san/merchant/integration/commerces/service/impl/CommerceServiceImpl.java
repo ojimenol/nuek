@@ -1,15 +1,14 @@
-package com.santander.san.merchant.integration.commerce.service.impl;
+package com.santander.san.merchant.integration.commerces.service.impl;
 
-import com.santander.san.merchant.config.CommerceProperties;
-import com.santander.san.merchant.integration.commerce.model.CommerceResponse;
-import com.santander.san.merchant.integration.commerce.service.CommerceService;
+import com.santander.san.merchant.config.NuekProperties;
+import com.santander.san.merchant.integration.commerces.model.CommerceResponse;
+import com.santander.san.merchant.integration.commerces.service.CommerceService;
 import com.santander.san.merchant.integration.cos.model.JWEEncryptResponse;
 import com.santander.san.merchant.integration.cos.service.CosService;
 import com.santander.san.merchant.model.PayloadCommerceRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
@@ -21,15 +20,15 @@ public class CommerceServiceImpl implements CommerceService {
 
   private final WebClient webClient;
 
-  private final CommerceProperties properties;
+  private final NuekProperties properties;
 
   @Autowired
   private CosService cosService;
 
-  public CommerceServiceImpl(WebClient.Builder webClientBuilder, CommerceProperties commerceProperties) {
-    this.properties = commerceProperties;
+  public CommerceServiceImpl(WebClient.Builder webClientBuilder, NuekProperties nuekProperties) {
+    this.properties = nuekProperties;
     this.webClient = webClientBuilder
-      .baseUrl(this.properties.getCommerceUrl())
+      .baseUrl(this.properties.getCommerces())
       .build();
   }
 
@@ -54,7 +53,6 @@ public class CommerceServiceImpl implements CommerceService {
         .queryParam("listDateTo", listDateTo)
         .build())
       .header(HttpHeaders.AUTHORIZATION, encryptResponse.getJwe())
-      .accept(MediaType.APPLICATION_JSON)
       .retrieve()
       .onStatus(HttpStatusCode::is4xxClientError, resp -> Mono.error(new HttpClientErrorException(resp.statusCode())))
       .onStatus(HttpStatusCode::is5xxServerError, resp -> Mono.error(new HttpServerErrorException(resp.statusCode())))

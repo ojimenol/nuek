@@ -1,8 +1,8 @@
 package com.santander.san.merchant.web;
 
+import com.santander.san.merchant.exception.ErrorModel;
 import com.santander.san.merchant.exception.InternalServerErrorException;
-import com.santander.san.merchant.integration.commerce.model.CommerceResponse;
-import com.santander.san.merchant.model.ErrorResponse;
+import com.santander.san.merchant.integration.commerces.model.CommerceResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -32,22 +32,22 @@ public interface CommerceController {
     @ApiResponse(
       responseCode = "400",
       description = "Bad Request",
-      content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+      content = @Content(schema = @Schema(implementation = ErrorModel.class))),
     //Unauthorized response
     @ApiResponse(
       responseCode = "401",
       description = "Unauthorized",
-      content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+      content = @Content(schema = @Schema(implementation = ErrorModel.class))),
     //Forbidden response
     @ApiResponse(
       responseCode = "403",
       description = "Forbidden",
-      content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+      content = @Content(schema = @Schema(implementation = ErrorModel.class))),
     //Not Found response
     @ApiResponse(
       responseCode = "404",
       description = "Not Found",
-      content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+      content = @Content(schema = @Schema(implementation = ErrorModel.class))),
     //Internal server response
     @ApiResponse(
       responseCode = "500",

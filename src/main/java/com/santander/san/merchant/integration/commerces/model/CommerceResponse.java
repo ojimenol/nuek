@@ -1,4 +1,4 @@
-package com.santander.san.merchant.integration.commerce.model;
+package com.santander.san.merchant.integration.commerces.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

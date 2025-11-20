@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component
-@ConfigurationProperties(prefix = "app.commerce")
-public class CommerceProperties {
-  private String commerceUrl;
+@ConfigurationProperties(prefix = "app.nuek")
+public class NuekProperties {
+  private String commerces;
 }

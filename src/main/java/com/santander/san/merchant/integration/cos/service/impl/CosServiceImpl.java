@@ -8,12 +8,10 @@ import com.santander.san.merchant.integration.cos.service.CosService;
 import com.santander.san.merchant.integration.sasautenticatecredentials.model.SasResponse;
 import com.santander.san.merchant.integration.sasautenticatecredentials.service.impl.SasAuthCredentialsServiceImpl;
 import com.santander.san.merchant.model.Payload;
-import io.netty.handler.codec.http.HttpContent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
-import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -46,8 +44,8 @@ public class CosServiceImpl implements CosService {
    * Instantiates a
    * new JweService service.
    *
-   * @param webClientBuilder                  the web client builder
-   * @param cosProperties                     the properties
+   * @param webClientBuilder the web client builder
+   * @param cosProperties    the properties
    */
   public CosServiceImpl(WebClient.Builder webClientBuilder, CosPropertiesConfig cosProperties) {
     this.cosProperties = cosProperties;
@@ -68,7 +66,7 @@ public class CosServiceImpl implements CosService {
       .header("Authorization", "Bearer " + sasResponse.getJwt())
       .header("Authentication", "Bearer " + sasResponse.getJwt())
       .header("Content-Type", "application/json")
-      .header("x-santander-client-id",cosProperties.getSantanderClientId())
+      .header("x-santander-client-id", cosProperties.getSantanderClientId())
       .bodyValue(getJWWERequest(data))
       .retrieve()
       .onStatus(HttpStatusCode::is4xxClientError, resp -> Mono.error(new HttpClientErrorException(resp.statusCode())))
@@ -78,10 +76,10 @@ public class CosServiceImpl implements CosService {
   }
 
   /**
-   * Gets jwwe request.
+   * Gets jwee request.
    *
    * @param data the data
-   * @return the jwwe request
+   * @return the jwee request
    */
   private JWEEncryptRequest getJWWERequest(Object data) {
 
