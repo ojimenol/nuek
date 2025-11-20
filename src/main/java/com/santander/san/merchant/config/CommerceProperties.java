@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @ConfigurationProperties(prefix = "app.commerce")
-public class AppCommerceProperties {
+public class CommerceProperties {
   private String commerceUrl;
 }

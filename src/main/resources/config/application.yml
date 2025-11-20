@@ -1,7 +1,34 @@
+spring:
+  profiles.active: local
+  application:
+    name: nuek
+  session:
+    store-type: none
+
+logging.level:
+  com.santander.san.merchant.MerchantApplication: ${env.tech-log}
+  root: ${env.root-log}
+
+
+
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+    path: /swagger-ui.html
+  use-fqn: true
+
+
 app:
   cos:
-    scos-jwe-url: https://srvnuarintra.santander.pru.bsch/cos/jwe/scos/generate
+    jweurl: ${env.commerce-portal.cos.jwe-url}
+    keyalias: ${env.commerce-portal.cos.keyalias}
+    santander-client-id: ${env.commerce-portal.cos.santander-client-id}
   sas:
-    sas-auth-url: https://srvnuarintra.santander.pru.bsch/sas/authenticate/credentials
-  commerce:
-    commerce-url: https://repgtnprep.minsaitpaymentsprocessing.com/api/Comercios/commerces
+    auth-url: ${env.commerce-portal.sas.auth-url}
+    credential-type-jwt: ${env.commerce-portal.sas.credential-type-jwt}
+    credential-type-token-corp: ${env.commerce-portal.sas.credential-type-token-corp}
+    uid: ${env.commerce-portal.sas.uid}
+    password: ${env.commerce-portal.sas.password}
+    realm: ${env.commerce-portal.sas.realm}
+  commerce-portal:
+    commerce-portal-url: ${env.commerce-portal-portal.commerce-portal-url}
