@@ -9,7 +9,10 @@ logging.level:
   com.santander.san.merchant.MerchantApplication: ${env.tech-log}
   root: ${env.root-log}
 
-
+server:
+  shutdown: graceful
+  error:
+    include-stacktrace: on_param
 
 springdoc:
   swagger-ui:
