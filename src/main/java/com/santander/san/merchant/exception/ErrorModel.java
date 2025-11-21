@@ -20,15 +20,15 @@ import java.util.Map;
 )
 @CustomErrorModel
 public class ErrorModel implements GraphQLErrorModel {
-  private List<CommerceErrorModelBuilder.GluonError> errors;
+  private List<CommerceErrorModelBuilder.Error> errors;
 
   @NonNull
   public String getGraphQlMessage() {
-    return ((CommerceErrorModelBuilder.GluonError) this.errors.get(this.errors.size() - 1)).getDescription();
+    return ((CommerceErrorModelBuilder.Error) this.errors.get(this.errors.size() - 1)).getDescription();
   }
 
   public Map<String, Object> getExtensions() {
-    CommerceErrorModelBuilder.GluonError error = (CommerceErrorModelBuilder.GluonError) this.errors.get(this.errors.size() - 1);
+    CommerceErrorModelBuilder.Error error = (CommerceErrorModelBuilder.Error) this.errors.get(this.errors.size() - 1);
     Map<String, Object> extensions = new HashMap();
     extensions.put("httpCode", error.getCode());
     extensions.put("httpMessage", error.getDescription());
@@ -37,7 +37,7 @@ public class ErrorModel implements GraphQLErrorModel {
   }
 
   @Generated
-  ErrorModel(final List<CommerceErrorModelBuilder.GluonError> errors) {
+  ErrorModel(final List<CommerceErrorModelBuilder.Error> errors) {
     this.errors = errors;
   }
 
@@ -47,7 +47,7 @@ public class ErrorModel implements GraphQLErrorModel {
   }
 
   @Generated
-  public List<CommerceErrorModelBuilder.GluonError> getErrors() {
+  public List<CommerceErrorModelBuilder.Error> getErrors() {
     return this.errors;
   }
 
@@ -56,12 +56,12 @@ public class ErrorModel implements GraphQLErrorModel {
   )
   public static class CommerceErrorModelBuilder implements ErrorModelBuilder<ErrorModel> {
     @Generated
-    private ArrayList<GluonError> errors;
+    private ArrayList<Error> errors;
 
     public ErrorModel buildErrorModel(Map<String, Object> errorModelAttributes) {
-      GluonError.GluonErrorBuilder var10000 = ErrorModel.CommerceErrorModelBuilder.GluonError.builder().description((String) errorModelAttributes.get("shortMessage"));
+      Error.GluonErrorBuilder var10000 = Error.builder().description((String) errorModelAttributes.get("shortMessage"));
       long var10001 = System.currentTimeMillis();
-      GluonError.GluonErrorBuilder errorBuilder = var10000.message(var10001 + "-" + String.valueOf(errorModelAttributes.get("appName")) + "-" + String.valueOf(errorModelAttributes.get("errorName")) + "-" + String.valueOf(errorModelAttributes.get("detailedMessage"))).code(String.valueOf(errorModelAttributes.get("status")));
+      Error.GluonErrorBuilder errorBuilder = var10000.message(var10001 + "-" + String.valueOf(errorModelAttributes.get("appName")) + "-" + String.valueOf(errorModelAttributes.get("errorName")) + "-" + String.valueOf(errorModelAttributes.get("detailedMessage"))).code(String.valueOf(errorModelAttributes.get("status")));
       return ErrorModel.builder().error(errorBuilder.build()).build();
     }
 
@@ -70,7 +70,7 @@ public class ErrorModel implements GraphQLErrorModel {
     }
 
     @Generated
-    public CommerceErrorModelBuilder error(final GluonError error) {
+    public CommerceErrorModelBuilder error(final Error error) {
       if (this.errors == null) {
         this.errors = new ArrayList();
       }
@@ -80,7 +80,7 @@ public class ErrorModel implements GraphQLErrorModel {
     }
 
     @Generated
-    public CommerceErrorModelBuilder errors(final Collection<? extends GluonError> errors) {
+    public CommerceErrorModelBuilder errors(final Collection<? extends Error> errors) {
       if (errors == null) {
         throw new NullPointerException("errors cannot be null");
       } else {
@@ -104,10 +104,10 @@ public class ErrorModel implements GraphQLErrorModel {
 
     @Generated
     public ErrorModel build() {
-      List<GluonError> errors;
+      List<Error> errors;
       switch (this.errors == null ? 0 : this.errors.size()) {
         case 0 -> errors = Collections.emptyList();
-        case 1 -> errors = Collections.singletonList((GluonError) this.errors.get(0));
+        case 1 -> errors = Collections.singletonList((Error) this.errors.get(0));
         default -> errors = Collections.unmodifiableList(new ArrayList(this.errors));
       }
 
@@ -123,7 +123,7 @@ public class ErrorModel implements GraphQLErrorModel {
     @JsonDeserialize(
       builder = CommerceErrorModelBuilder.class
     )
-    public static class GluonError {
+    public static class Error {
       private String code;
       private String description;
       private static String ERROR_LEVEL = "error";
@@ -136,7 +136,7 @@ public class ErrorModel implements GraphQLErrorModel {
       }
 
       @Generated
-      GluonError(final String code, final String description, final String level, final String message) {
+      Error(final String code, final String description, final String level, final String message) {
         this.code = code;
         this.description = description;
         this.level = level;
@@ -233,13 +233,13 @@ public class ErrorModel implements GraphQLErrorModel {
         }
 
         @Generated
-        public GluonError build() {
+        public Error build() {
           String level$value = this.level$value;
           if (!this.level$set) {
-            level$value = ErrorModel.CommerceErrorModelBuilder.GluonError.$default$level();
+            level$value = Error.$default$level();
           }
 
-          return new GluonError(this.code, this.description, level$value, this.message);
+          return new Error(this.code, this.description, level$value, this.message);
         }
 
         @Generated
