@@ -1,6 +1,7 @@
 package com.santander.san.merchant.integration.cos.service.impl;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.santander.san.merchant.config.CosPropertiesConfig;
 import com.santander.san.merchant.integration.cos.model.JWEEncryptRequest;
 import com.santander.san.merchant.integration.cos.model.JWEEncryptResponse;
@@ -16,6 +17,8 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+
+import java.util.Map;
 
 /**
  * The type Cos service.
@@ -83,10 +86,18 @@ public class CosServiceImpl implements CosService {
    */
   private JWEEncryptRequest getJWWERequest(Object data) {
 
+    Map<String, Object> fields;
+
+    if (data instanceof Map) {
+      fields = (Map<String, Object>) data;
+    } else {
+      ObjectMapper mapper = new ObjectMapper();
+      fields = mapper.convertValue(data, Map.class);
+    }
+
     return JWEEncryptRequest.builder()
       .keyalias(cosProperties.getKeyalias())
-      .payload(Payload.builder()
-        .data(data).build())
+      .payload(Payload.builder().fields(fields).build())
       .build();
   }
 
