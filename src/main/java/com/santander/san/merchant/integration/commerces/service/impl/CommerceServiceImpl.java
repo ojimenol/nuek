@@ -1,7 +1,7 @@
 package com.santander.san.merchant.integration.commerces.service.impl;
 
 import com.santander.san.merchant.config.NuekProperties;
-import com.santander.san.merchant.integration.commerces.model.CommerceResponse;
+import com.santander.san.merchant.integration.commerces.model.CommerceListResponse;
 import com.santander.san.merchant.integration.commerces.service.CommerceService;
 import com.santander.san.merchant.integration.cos.model.JWEEncryptResponse;
 import com.santander.san.merchant.integration.cos.service.CosService;
@@ -34,9 +34,9 @@ public class CommerceServiceImpl implements CommerceService {
 
 
   @Override
-  public CommerceResponse getCommerces(String personCode, String personType,
-                                       String billingDateFrom, String billingDateTo, String order,
-                                       String listDateFrom, String listDateTo) {
+  public CommerceListResponse getCommerces(String personCode, String personType,
+                                           String billingDateFrom, String billingDateTo, String order,
+                                           String listDateFrom, String listDateTo) {
 
     JWEEncryptResponse encryptResponse = cosService.generateJwe(buildCommerceRequest(personCode, personType,
       billingDateFrom, billingDateTo, order, listDateFrom, listDateTo));
@@ -56,7 +56,7 @@ public class CommerceServiceImpl implements CommerceService {
       .retrieve()
       .onStatus(HttpStatusCode::is4xxClientError, resp -> Mono.error(new HttpClientErrorException(resp.statusCode())))
       .onStatus(HttpStatusCode::is5xxServerError, resp -> Mono.error(new HttpServerErrorException(resp.statusCode())))
-      .bodyToMono(CommerceResponse.class)
+      .bodyToMono(CommerceListResponse.class)
       .block();
   }
 

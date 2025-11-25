@@ -1,6 +1,6 @@
 package com.santander.san.merchant.web.impl;
 
-import com.santander.san.merchant.integration.commerces.model.CommerceResponse;
+import com.santander.san.merchant.integration.commerces.model.CommerceListResponse;
 import com.santander.san.merchant.integration.commerces.service.CommerceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +21,10 @@ public class CommerceControllerImpl {
   private CommerceService commerceService;
 
   @GetMapping
-  public ResponseEntity<CommerceResponse> getCommerces(@RequestParam String personCode,
-    @RequestParam String personType, @RequestParam String billingDateFrom, @RequestParam String billingDateTo,
-    @RequestParam String order, @RequestParam String listDateFrom,  @RequestParam String listDateTo) {
-     return new ResponseEntity<>(commerceService.getCommerces(personCode, personType,
+  public ResponseEntity<CommerceListResponse> getCommerces(@RequestParam String personCode,
+                                                           @RequestParam String personType, @RequestParam String billingDateFrom, @RequestParam String billingDateTo,
+                                                           @RequestParam String order, @RequestParam String listDateFrom, @RequestParam String listDateTo) {
+    return new ResponseEntity<>(commerceService.getCommerces(personCode, personType,
       billingDateFrom, billingDateTo, order, listDateFrom, listDateTo), HttpStatus.OK);
 
   }

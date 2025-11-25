@@ -2,7 +2,7 @@ package com.santander.san.merchant.web;
 
 import com.santander.san.merchant.exception.ErrorModel;
 import com.santander.san.merchant.exception.InternalServerErrorException;
-import com.santander.san.merchant.integration.commerces.model.CommerceResponse;
+import com.santander.san.merchant.integration.commerces.model.Commerce;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -27,7 +27,7 @@ public interface CommerceController {
       responseCode = "200",
       description = "successful operation",
       content = @Content(
-        schema = @Schema(implementation = CommerceResponse.class))),
+        schema = @Schema(implementation = Commerce.class))),
     //Bad request response
     @ApiResponse(
       responseCode = "400",
@@ -64,8 +64,8 @@ public interface CommerceController {
       description = "Gateway timeout",
       content = @Content(schema = @Schema(implementation = InternalServerErrorException.class)))
   })
-  public ResponseEntity<CommerceResponse> getCommerces(
+  ResponseEntity<Commerce> getCommerces(
     @RequestHeader("Authorization") String authorization, @RequestParam String personCode,
     @RequestParam String personType, @RequestParam String billingDateFrom, @RequestParam String billingDateTo,
-    @RequestParam String order, @RequestParam String listDateFrom,  @RequestParam String listDateTo) ;
+    @RequestParam String order, @RequestParam String listDateFrom, @RequestParam String listDateTo);
 }
